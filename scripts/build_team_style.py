@@ -177,7 +177,8 @@ if "{{" in final_text or "}}" in final_text:
     sys.exit("成品里仍有模板语法，终止")
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-OUT.write_text(final_text, encoding="utf-8")
+# 用二进制写出，保证换行统一是 LF，不受 Windows 文本模式影响
+OUT.write_bytes(final_text.encode("utf-8"))
 
 print("SOURCE:", SRC)
 print("OUTPUT:", OUT)
